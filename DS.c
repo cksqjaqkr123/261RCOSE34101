@@ -2,16 +2,16 @@
 #include "DS.h"
 #include <stdlib.h>
 
-PCB* make_proc() {
+PCB* make_proc(int pid) {
     PCB* new_PCB = malloc(sizeof(PCB));
 
-    new_PCB -> PID = rand() % 10000;
+    new_PCB -> PID = pid;
 
-    new_PCB -> Arrival_t = rand() % 50;
+    new_PCB -> Arrival_t = rand() % 51;
     new_PCB -> Priority = rand() % 10;
 
     new_PCB -> CPU_burst_t = rand() % 30;
-    new_PCB -> IO_burst_t = rand() % 15;
+    new_PCB -> IO_remain = new_PCB -> IO_burst_t = rand() % 15;
     new_PCB -> IO_cycle = rand() % 30;
 
     new_PCB -> next = NULL;
@@ -27,6 +27,14 @@ void print_PCB(PCB* proc) {
     printf("IO burst time : %d\n", proc -> IO_burst_t);
 }
 
+qnode* make_qnode(PCB* proc) {
+    qnode* new_qnode = malloc(sizeof(qnode));
+
+    new_qnode -> proc = proc;
+    new_qnode -> nextq = NULL;
+
+    return new_qnode;
+}
 queue* q_make() {
     queue* new_q = malloc(sizeof(queue));
 
@@ -38,28 +46,35 @@ queue* q_make() {
 }
 
 void q_push(queue* q, PCB* proc) {
+
+    qnode* new_qnode = make_qnode(proc);
+
     if (q -> head == NULL) {
-        q -> head = proc;
-        q -> tail = proc;
+        q -> head = new_qnode;
+        q -> tail = new_qnode;
     }
     else {
-        q -> tail -> next = proc;
-        q -> tail = proc;
+        q -> tail -> nextq = new_qnode;
+        q -> tail = new_qnode;
     }
     q -> cnt += 1;
 }
 
 PCB* q_pop(queue* q) {
-    PCB* tmp = NULL;
+    qnode* qtmp = NULL;
+    PCB* ptmp = NULL;
 
     if (q -> head != NULL) {
-        tmp = q -> head;
-        q -> head = tmp -> next;
-        if (tmp -> next == NULL) q -> tail = NULL;
-        tmp -> next = NULL;
+        qtmp = q -> head;
+        q -> head = qtmp -> nextq;
+        if (qtmp -> nextq == NULL) q -> tail = NULL;
+        qtmp -> nextq = NULL;
     }
 
-    if (tmp != NULL) q -> cnt -= 1;
-
-    return tmp;
+    if (qtmp != NULL) {
+        q -> cnt -= 1;
+        ptmp = qtmp -> proc;
+    }
+    free(qtmp);
+    return ptmp;
 }

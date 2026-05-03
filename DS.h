@@ -10,22 +10,29 @@ typedef struct PCB {
     int CPU_burst_t;
     int IO_burst_t;
     int IO_cycle;
-
+    int IO_remain;
 
     struct PCB* next;
 
 } PCB;
 
-typedef struct {
-    PCB* head;
-    PCB* tail;
+typedef struct qnode {
+    PCB* proc;
+    
+    struct qnode* nextq;
+} qnode;
+
+typedef struct queue {
+    qnode* head;
+    qnode* tail;
     int cnt;
 
 } queue;
 
-PCB* make_proc();
+PCB* make_proc(int pid);
 void print_PCB(PCB* proc);
 
+qnode* make_qnode(PCB* proc);
 queue* q_make();
 void q_push(queue* q, PCB* proc);
 PCB* q_pop(queue* q);
