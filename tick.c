@@ -18,6 +18,7 @@ void tick(int n, int mode) {
 
     queue** job_q = make_job_q(q);
     queue* ready_q = q_make();
+    PCB** wait_list = make_wait_list();
 
     while (proc_cnt < n) {
         printf("------------------------\n");
@@ -25,12 +26,12 @@ void tick(int n, int mode) {
         
         run_p = sche(ready_q, run_p, time_cnt, mode);
         proc_run(run_p, time_cnt, &proc_cnt);
+        check_IO(wait_list, &run_p, ready_q, mode);
         check_job_q(ready_q, job_q, time_cnt, mode);
         
 
         time_cnt += 1;
 
-        printf("%d\n", proc_cnt);
     }
 
     for (int i = 0;i<n;i++) {

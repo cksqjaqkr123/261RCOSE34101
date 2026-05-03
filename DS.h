@@ -10,8 +10,9 @@ typedef struct PCB {
     int CPU_burst_t;
     int IO_burst_t;
     int IO_cycle;
-    int IO_remain;
-
+    int IO_cycle_remain;
+    int IO_burst_remain;
+    
     struct PCB* next;
 
 } PCB;
@@ -29,6 +30,7 @@ typedef struct queue {
 
 } queue;
 
+void kernel_panic(void);
 PCB* make_proc(int pid);
 void print_PCB(PCB* proc);
 

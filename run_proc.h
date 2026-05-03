@@ -5,9 +5,11 @@
 
 queue** make_job_q(queue *procs);
 
+PCB** make_wait_list(void);
+
 void check_job_q(queue* ready_q, queue** job_q, int tick, int mode);
 
-void check_IO(queue* wait_q);
+void check_IO(PCB** wait_list, PCB** run_p, queue* ready_q, int mode);
 
 void push_ready_q(queue* ready_q, PCB* proc, int mode);
 
