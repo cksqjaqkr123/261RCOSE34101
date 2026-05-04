@@ -25,7 +25,7 @@ void tick(int n, int mode) {
         printf("time : %d\n",time_cnt);
         
         run_p = sche(ready_q, run_p, time_cnt, mode);
-        proc_run(run_p, time_cnt, &proc_cnt);
+        proc_run(&run_p, time_cnt, &proc_cnt);
         check_IO(wait_list, &run_p, ready_q, mode);
         check_job_q(ready_q, job_q, time_cnt, mode);
         

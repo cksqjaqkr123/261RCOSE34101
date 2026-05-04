@@ -15,6 +15,6 @@ void push_ready_q(queue* ready_q, PCB* proc, int mode);
 
 PCB* sche(queue* ready_q, PCB* run_p, int tick, int mode);
 
-void proc_run(PCB* run_p, int tick, int* proc_cnt);
+void proc_run(PCB** run_p, int tick, int* proc_cnt);
 
 #endif

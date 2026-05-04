@@ -8,11 +8,12 @@ typedef struct PCB {
     int Priority;
 
     int CPU_burst_t;
+    int CPU_burst_remain;
     int IO_burst_t;
     int IO_cycle;
     int IO_cycle_remain;
     int IO_burst_remain;
-    
+
     struct PCB* next;
 
 } PCB;

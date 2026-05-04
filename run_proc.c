@@ -84,24 +84,25 @@ void push_ready_q(queue* ready_q, PCB* proc, int mode) {
 }
 
 PCB* sche(queue* ready_q, PCB* run_p, int tick, int mode) {
-    if (run_p == NULL || run_p -> CPU_burst_t <= 0) {
+    if (run_p == NULL) {
         run_p = q_pop(ready_q);
     }
     return run_p;
 };
 
-void proc_run(PCB* run_p, int tick, int* proc_cnt) {
-    if (run_p == NULL) return;
+void proc_run(PCB** run_p, int tick, int* proc_cnt) {
+    if (*run_p == NULL) return;
 
-    run_p -> CPU_burst_t -= 1;
-    run_p -> IO_cycle_remain -= 1;
+    (*run_p) -> CPU_burst_remain -= 1;
+    (*run_p) -> IO_cycle_remain -= 1;
 
-    if (run_p -> CPU_burst_t == 0) {
-        printf("process was successfully terminated at %d (pid : %d)\n", tick, run_p -> PID);
+    if ((*run_p) -> CPU_burst_remain == 0) {
+        printf("process was successfully terminated at %d (pid : %d)\n", tick, (*run_p) -> PID);
         *proc_cnt += 1;
+        *run_p = NULL;
     }
     else {
-        printf("process (PID : %d) is running. (Left : %d\n)", run_p -> PID, run_p -> CPU_burst_t);
+        printf("process (PID : %d) is running. (CPU burst Left : %d\n)", (*run_p) -> PID, (*run_p) -> CPU_burst_remain);
     }
     return;
 }
