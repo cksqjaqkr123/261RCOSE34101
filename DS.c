@@ -17,6 +17,7 @@ PCB* make_proc(int pid) {
     new_PCB -> CPU_burst_remain = new_PCB -> CPU_burst_t = rand() % 30;
     new_PCB -> IO_burst_remain = new_PCB -> IO_burst_t = rand() % 15;
     new_PCB -> IO_cycle_remain = new_PCB -> IO_cycle = rand() % 40;
+    new_PCB -> Q = 0;
     
     new_PCB -> next = NULL;
 

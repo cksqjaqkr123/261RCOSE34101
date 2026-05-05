@@ -13,6 +13,7 @@ typedef struct PCB {
     int IO_cycle;
     int IO_cycle_remain;
     int IO_burst_remain;
+    int Q;
 
     struct PCB* next;
 

@@ -6,5 +6,4 @@
 
 void tick(int n, int mode);
 
-
 #endif
