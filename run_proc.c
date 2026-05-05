@@ -8,7 +8,7 @@
 
 #define time_Q 5
 
-void check_job_q(queue* ready_q, queue** job_q, int tick, int mode) {
+void check_job_q(queue* ready_q, heap* ready_h, queue** job_q, int tick, int mode) {
     if (tick >= 51) return;
 
     qnode* tmp = job_q[tick] -> head;
@@ -16,12 +16,13 @@ void check_job_q(queue* ready_q, queue** job_q, int tick, int mode) {
     while (tmp != NULL) {
         printf("process arrived at %d (pid : %d)\n", tick, tmp -> proc -> PID);
         printf("CPU burst time : %d, I/O burst time : %d, I/O cycle : %d\n", tmp -> proc -> CPU_burst_t, tmp -> proc -> IO_burst_t, tmp -> proc -> IO_cycle);
-        push_ready_q(ready_q, tmp -> proc, mode);
+        printf("Priority : %d\n", tmp -> proc -> Priority);
+        push_ready_q(ready_q, ready_h, tmp -> proc, mode);
         tmp = tmp -> nextq;
     }
 }
 
-void check_IO(PCB** wait_list, PCB** run_p, queue* ready_q, int mode) {
+void check_IO(PCB** wait_list, PCB** run_p, queue* ready_q, heap* ready_h, int mode) {
     int flag = 0;
     int idx = -1;
 
@@ -31,7 +32,7 @@ void check_IO(PCB** wait_list, PCB** run_p, queue* ready_q, int mode) {
             if (wait_list[i] -> IO_burst_remain == 0) {
                 printf("process's I/O task ended (PID : %d)\n", wait_list[i] -> PID);
                 wait_list[i] -> IO_burst_remain = wait_list[i] -> IO_burst_t;
-                push_ready_q(ready_q, wait_list[i], mode);
+                push_ready_q(ready_q, ready_h, wait_list[i], mode);
                 wait_list[i] = NULL;
 
                 if (flag == 0) {
@@ -62,17 +63,25 @@ void check_IO(PCB** wait_list, PCB** run_p, queue* ready_q, int mode) {
     }
 }
 
-void push_ready_q(queue* ready_q, PCB* proc, int mode) {
-    q_push(ready_q, proc);
+void push_ready_q(queue* ready_q, heap* ready_h, PCB* proc, int mode) {
+    if (mode <= 2) q_push(ready_q, proc);
+    else if (mode == 3) push_heap(ready_h, proc, &compare_SJ);
+    else if (mode == 4) push_heap(ready_h, proc, &compare_Priority);
 }
 
-PCB* sche(queue* ready_q, PCB* run_p, int tick, int mode) {
+PCB* sche(queue* ready_q, heap* ready_h, PCB* run_p, int tick, int mode) {
 
     if (mode == 1) {
         run_p = sche_FCFS(ready_q, run_p);
     }
     else if (mode == 2) {
-        run_p = sche_RR(ready_q, run_p, mode);
+        run_p = sche_RR(ready_q, ready_h, run_p, mode);
+    }
+    else if (mode == 3) {
+        run_p = sche_non_preem_SJF(ready_h, run_p);
+    }
+    else if (mode == 4) {
+        run_p = sche_non_preem_Priority(ready_h, run_p);
     }
 
     return run_p;

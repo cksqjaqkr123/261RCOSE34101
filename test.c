@@ -8,7 +8,7 @@
 
 int main(void) {
 
-    int mode = 2;
+    int mode = 1;
     srand(10000);
 
 

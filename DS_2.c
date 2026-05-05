@@ -113,11 +113,11 @@ int compare_Priority(PCB* a, PCB* b) {
     int bP = b -> Priority;
 
     if (aP < bP) return 1;
-    else if (aP == bP) return compare_Job(a, b);
+    else if (aP == bP) return compare_SJ(a, b);
     else return -1;
 }
 
-int compare_Job(PCB* a, PCB* b) {
+int compare_SJ(PCB* a, PCB* b) {
     int aJ = a -> CPU_burst_t;
     int bJ = b -> CPU_burst_t;
 

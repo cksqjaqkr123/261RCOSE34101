@@ -13,7 +13,7 @@ PCB* sche_FCFS(queue* ready_q, PCB* run_p) {
     return run_p;
 }
 
-PCB* sche_RR(queue* ready_q, PCB* run_p, int mode) {
+PCB* sche_RR(queue* ready_q, heap* ready_h, PCB* run_p, int mode) {
     PCB* bf_run_p = run_p;
 
     if (run_p == NULL) {
@@ -21,12 +21,28 @@ PCB* sche_RR(queue* ready_q, PCB* run_p, int mode) {
     }
     else if (run_p -> Q <= 0) {
         run_p -> Q = time_Q;
-        push_ready_q(ready_q, run_p, mode);
+        push_ready_q(ready_q, ready_h, run_p, mode);
         run_p = q_pop(ready_q);
     }
 
     if (bf_run_p != run_p) {
         run_p -> Q = time_Q;
+    }
+
+    return run_p;
+}
+
+PCB* sche_non_preem_SJF(heap* ready_h, PCB* run_p) {
+    if (run_p == NULL) {
+        run_p = pop_heap(ready_h, &compare_SJ);
+    }
+
+    return run_p;
+}
+
+PCB* sche_non_preem_Priority(heap* ready_h, PCB* run_p) {
+    if (run_p == NULL) {
+        run_p = pop_heap(ready_h, &compare_Priority);
     }
 
     return run_p;
