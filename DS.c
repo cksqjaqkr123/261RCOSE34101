@@ -6,10 +6,10 @@ void kernel_panic(void) {
     exit(1);
 }
 
-PCB* make_proc(int pid) {
+PCB* make_proc(void) {
     PCB* new_PCB = malloc(sizeof(PCB));
 
-    new_PCB -> PID = pid;
+    new_PCB -> PID = 0;
 
     new_PCB -> Arrival_t = rand() % 51;
     new_PCB -> Priority = rand() % 10;

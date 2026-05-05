@@ -8,15 +8,19 @@
 
 #define time_Q 5
 
-void check_job_q(queue* ready_q, heap* ready_h, queue** job_q, int tick, int mode) {
+void check_job_q(queue* ready_q, heap* ready_h, queue** job_q, int tick, int mode, int* pid) {
     if (tick >= 51) return;
 
     qnode* tmp = job_q[tick] -> head;
 
     while (tmp != NULL) {
-        printf("process arrived at %d (pid : %d)\n", tick, tmp -> proc -> PID);
+        tmp -> proc -> PID = *pid;
+        *pid += 1;
+        printf("******************************************************\n");
+        printf("process (PID : %d) was arrived.\n", tmp -> proc -> PID);
         printf("CPU burst time : %d, I/O burst time : %d, I/O cycle : %d\n", tmp -> proc -> CPU_burst_t, tmp -> proc -> IO_burst_t, tmp -> proc -> IO_cycle);
         printf("Priority : %d\n", tmp -> proc -> Priority);
+        printf("******************************************************\n");
         push_ready_q(ready_q, ready_h, tmp -> proc, mode);
         tmp = tmp -> nextq;
     }
@@ -30,7 +34,7 @@ void check_IO(PCB** wait_list, PCB** run_p, queue* ready_q, heap* ready_h, int m
         if (wait_list[i] != NULL) {
             wait_list[i] -> IO_burst_remain -= 1;
             if (wait_list[i] -> IO_burst_remain == 0) {
-                printf("process's I/O task ended (PID : %d)\n", wait_list[i] -> PID);
+                printf("process (PID : %d) I/O task ended.\n", wait_list[i] -> PID);
                 wait_list[i] -> IO_burst_remain = wait_list[i] -> IO_burst_t;
                 push_ready_q(ready_q, ready_h, wait_list[i], mode);
                 wait_list[i] = NULL;
@@ -56,7 +60,7 @@ void check_IO(PCB** wait_list, PCB** run_p, queue* ready_q, heap* ready_h, int m
         (*run_p) -> Q = time_Q;
         if (idx < 0) kernel_panic();
         else {
-        printf("into waiting status due to I/O cycle (PID : %d)\n", (*run_p) -> PID);
+        printf("into waiting status due to I/O cycle\n", (*run_p) -> PID);
         wait_list[idx] = *run_p;
         *run_p = NULL;
         }
@@ -102,15 +106,14 @@ void proc_run(PCB** run_p, int tick, int* proc_cnt, int* turn_t) {
     (*run_p) -> IO_cycle_remain -= 1;
     (*run_p) -> Q -= 1;
 
+    printf("process (PID : %d) was run. (CPU burst Left : %d)\n", (*run_p) -> PID, (*run_p) -> CPU_burst_remain);
     if ((*run_p) -> CPU_burst_remain == 0) {
-        printf("process was successfully terminated at %d (pid : %d)\n", tick, (*run_p) -> PID);
+        printf("...and successfully terminated.\n");
         *proc_cnt += 1;
         *turn_t += tick - (*run_p) -> Arrival_t;
         *run_p = NULL;
     }
-    else {
-        printf("process (PID : %d) is running. (CPU burst Left : %d\n)", (*run_p) -> PID, (*run_p) -> CPU_burst_remain);
-    }
+
     return;
 }
 

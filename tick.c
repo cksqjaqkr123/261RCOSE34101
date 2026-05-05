@@ -3,6 +3,7 @@
 #include "DS.h"
 #include "DS_2.h"
 #include "run_proc.h"
+#include <unistd.h>
 
 void tick(int n, int mode) {
     queue* q = q_make();
@@ -11,13 +12,14 @@ void tick(int n, int mode) {
     
     qnode* t = NULL;
     int proc_cnt = 0;
+    int pid = 0;
     int time_cnt = 0;
     int wait_t = 0;
     int turn_t = 0;
 
 
     for (int i = 0;i<n;i++) {
-        q_push(q, make_proc(i));
+        q_push(q, make_proc());
     }
 
     queue** job_q = make_job_q(q);
@@ -26,8 +28,8 @@ void tick(int n, int mode) {
     PCB** wait_list = make_wait_list();
 
     while (proc_cnt < n) {
-        printf("------------------------\n");
-        printf("time : %d\n",time_cnt);
+        printf("-------------------------\n");
+        printf("<time : %d>\n",time_cnt);
         
         run_p = sche(ready_q, ready_h, run_p, time_cnt, mode);
         proc_run(&run_p, time_cnt, &proc_cnt, &turn_t);
@@ -37,9 +39,11 @@ void tick(int n, int mode) {
         
 
         check_IO(wait_list, &run_p, ready_q, ready_h, mode);
-        check_job_q(ready_q, ready_h, job_q, time_cnt, mode);
+        check_job_q(ready_q, ready_h, job_q, time_cnt, mode, &pid);
         
         time_cnt += 1;
+
+        sleep(1);
 
     }
 

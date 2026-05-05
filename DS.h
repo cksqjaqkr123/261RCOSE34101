@@ -33,7 +33,7 @@ typedef struct queue {
 } queue;
 
 void kernel_panic(void);
-PCB* make_proc(int pid);
+PCB* make_proc(void);
 void print_PCB(PCB* proc);
 
 qnode* make_qnode(PCB* proc);

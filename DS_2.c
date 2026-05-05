@@ -7,6 +7,7 @@
 #define HEAP_SIZE 200
 
 queue** make_job_q(queue* procs) {
+    int cnt = 0;
     queue** new_job_q = malloc(sizeof(queue*) * JOP_Q_SIZE);
     qnode* tmp = procs -> head;
 
@@ -16,6 +17,7 @@ queue** make_job_q(queue* procs) {
 
     while (tmp != NULL) {
         q_push(new_job_q[tmp -> proc -> Arrival_t], tmp -> proc);
+
         tmp = tmp -> nextq;
     }
 
