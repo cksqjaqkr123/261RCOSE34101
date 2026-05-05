@@ -65,8 +65,10 @@ void check_IO(PCB** wait_list, PCB** run_p, queue* ready_q, heap* ready_h, int m
 
 void push_ready_q(queue* ready_q, heap* ready_h, PCB* proc, int mode) {
     if (mode <= 2) q_push(ready_q, proc);
-    else if (mode == 3) push_heap(ready_h, proc, &compare_SJ);
-    else if (mode == 4) push_heap(ready_h, proc, &compare_Priority);
+    else if (mode == 3) push_heap(ready_h, proc, &compare_SJ_fix);
+    else if (mode == 4) push_heap(ready_h, proc, &compare_Priority_fix);
+    else if (mode == 5) push_heap(ready_h, proc, &compare_SJ_burst);
+    else if (mode == 6) push_heap(ready_h, proc, &compare_Priority_burst);
 }
 
 PCB* sche(queue* ready_q, heap* ready_h, PCB* run_p, int tick, int mode) {
@@ -82,6 +84,12 @@ PCB* sche(queue* ready_q, heap* ready_h, PCB* run_p, int tick, int mode) {
     }
     else if (mode == 4) {
         run_p = sche_non_preem_Priority(ready_h, run_p);
+    }
+    else if (mode == 5) {
+        run_p = sche_preem_SJF(ready_h, run_p);
+    }
+    else if (mode == 6) {
+        run_p = sche_preem_Priority(ready_h, run_p);
     }
 
     return run_p;

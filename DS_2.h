@@ -19,7 +19,9 @@ void push_heap(heap* heap, PCB* proc, int (*compare) (PCB*, PCB*));
 PCB* pop_heap(heap* heap, int (*compare) (PCB*, PCB*));
 void swap(PCB** array, int i, int j);
 
-int compare_Priority(PCB* a, PCB* b);
-int compare_SJ(PCB* a, PCB* b);
+int compare_Priority_fix(PCB* a, PCB* b);
+int compare_SJ_fix(PCB* a, PCB* b);
+int compare_Priority_burst(PCB* a, PCB* b);
+int compare_SJ_burst(PCB* a, PCB* b);
 
 #endif

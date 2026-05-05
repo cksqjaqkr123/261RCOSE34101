@@ -8,7 +8,11 @@
 
 int main(void) {
 
-    int mode = 1;
+    int mode = 0;
+
+    printf("모드를 입력 (1 : FCFS, 2 : RR, 3 : Non-p-SJF, 4 : Non-p-Priority, 5 : p-SJF, 6 : p-Priority)\n");
+    scanf("%d", &mode);
+
     srand(10000);
 
 

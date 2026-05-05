@@ -108,18 +108,35 @@ void swap(PCB** array, int i, int j) {
     array[j] = tmp;
 }
 
-int compare_Priority(PCB* a, PCB* b) {
+int compare_Priority_fix(PCB* a, PCB* b) {
     int aP = a -> Priority;
     int bP = b -> Priority;
 
     if (aP < bP) return 1;
-    else if (aP == bP) return compare_SJ(a, b);
+    else if (aP == bP) return compare_SJ_fix(a, b);
     else return -1;
 }
 
-int compare_SJ(PCB* a, PCB* b) {
+int compare_SJ_fix(PCB* a, PCB* b) {
     int aJ = a -> CPU_burst_t;
     int bJ = b -> CPU_burst_t;
+
+    if (aJ <= bJ) return 1;
+    else return -1;
+}
+
+int compare_Priority_burst(PCB* a, PCB* b) {
+    int aP = a -> Priority;
+    int bP = b -> Priority;
+
+    if (aP < bP) return 1;
+    else if (aP == bP) return compare_SJ_burst(a, b);
+    else return -1;
+}
+
+int compare_SJ_burst(PCB* a, PCB* b) {
+    int aJ = a -> CPU_burst_remain;
+    int bJ = b -> CPU_burst_remain;
 
     if (aJ <= bJ) return 1;
     else return -1;

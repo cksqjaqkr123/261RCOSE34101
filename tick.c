@@ -39,7 +39,6 @@ void tick(int n, int mode) {
         check_IO(wait_list, &run_p, ready_q, ready_h, mode);
         check_job_q(ready_q, ready_h, job_q, time_cnt, mode);
         
-
         time_cnt += 1;
 
     }
