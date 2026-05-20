@@ -2,16 +2,16 @@
 #include <stdlib.h>
 #include "DS_2.h"
 
-#define JOP_Q_SIZE 51
+#define JOB_Q_SIZE 51
 #define WAIT_L_SIZE 100
 #define HEAP_SIZE 200
 
 queue** make_job_q(queue* procs) {
     int cnt = 0;
-    queue** new_job_q = malloc(sizeof(queue*) * JOP_Q_SIZE);
+    queue** new_job_q = malloc(sizeof(queue*) * JOB_Q_SIZE);
     qnode* tmp = procs -> head;
 
-    for (int i = 0; i < 51 ; i++) {
+    for (int i = 0; i < JOB_Q_SIZE ; i++) {
         new_job_q[i] = q_make();
     }
 
@@ -24,12 +24,27 @@ queue** make_job_q(queue* procs) {
     return new_job_q;
 }
 
+void free_job_q(queue** job_q) {
+    for (int i = 0; i < JOB_Q_SIZE ; i++) {
+        free_q(job_q[i]);
+    }
+    free(job_q);
+}
+
 PCB** make_wait_list(void) {
     PCB** new_wait_list = malloc(sizeof(PCB*) * WAIT_L_SIZE);
     for (int i = 0; i < WAIT_L_SIZE; i++) {
         new_wait_list[i] = NULL;
     }
     return new_wait_list;
+}
+
+void free_wait_list(PCB** wait_list) {
+    for (int i = 0;i< WAIT_L_SIZE;i++) {
+        if (wait_list[i] != NULL)
+            free(wait_list[i]);
+    }
+    free(wait_list);
 }
 
 heap* make_heap(void) {
@@ -102,6 +117,16 @@ PCB* pop_heap(heap* heap, int (*compare) (PCB*, PCB*)) {
     }
 
     return heap -> array[heap -> size];
+}
+
+void free_heap(heap* h) {
+    PCB* x = NULL;
+    while(h-> size > 0) {
+        PCB* x = pop_heap(h, &compare_Priority_burst);
+        if (x != NULL)
+            free(x);
+    }
+    free(h);
 }
 
 void swap(PCB** array, int i, int j) {

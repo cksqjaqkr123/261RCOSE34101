@@ -78,11 +78,12 @@ void tick(int n, int mode, int Test_mode, int B_mode) {
 
     }
 
-
-    for (int i = 0;i<n;i++) {
-        tmp = q_pop(q);
-        free(tmp);
-    }
+    free_heap(ready_h);
+    free_wait_list(wait_list);
+    free_job_q(job_q);
+    free_PCB_q(q);
+    free_q(ready_q);
+    free_q(q);
 
     printf("===========================\n");
     printf("All processes are terminated successfully.\n");

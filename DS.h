@@ -41,6 +41,8 @@ void print_PCB(PCB* proc);
 
 qnode* make_qnode(PCB* proc);
 queue* q_make();
+void free_PCB_q(queue* q);
+void free_q(queue* q);
 void q_push(queue* q, PCB* proc);
 PCB* q_pop(queue* q);
 

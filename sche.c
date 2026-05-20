@@ -53,7 +53,7 @@ PCB* sche_preem_SJF(heap* ready_h, PCB* run_p) {
         run_p = pop_heap(ready_h, &compare_SJ_burst);
     }
     else if (ready_h -> size > 0) {
-        if (compare_Priority_burst(run_p, ready_h -> array[0])) {
+        if (compare_SJ_burst(run_p, ready_h -> array[0]) < 0) {
             push_heap(ready_h, run_p, &compare_SJ_burst);
             run_p = pop_heap(ready_h, &compare_SJ_burst);
         }

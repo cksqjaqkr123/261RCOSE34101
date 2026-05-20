@@ -12,11 +12,14 @@ typedef struct heap {
 } heap;
 
 queue** make_job_q(queue* procs);
+void free_job_q(queue** job_q);
 PCB** make_wait_list(void);
+void free_wait_list(PCB** wait_list);
 
 heap* make_heap(void);
 void push_heap(heap* heap, PCB* proc, int (*compare) (PCB*, PCB*));
 PCB* pop_heap(heap* heap, int (*compare) (PCB*, PCB*));
+void free_heap(heap* h);
 void swap(PCB** array, int i, int j);
 
 int compare_Priority_fix(PCB* a, PCB* b);

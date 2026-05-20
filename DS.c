@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 void kernel_panic(void) {
+    printf("panic!!!!\n");
     exit(1);
 }
 
@@ -103,6 +104,25 @@ queue* q_make() {
     new_q -> cnt = 0;
 
     return new_q;
+}
+
+void free_PCB_q(queue* q) {
+    qnode* tmp = q -> head;
+    while (tmp != NULL) {
+        free(tmp -> proc);
+        tmp = tmp -> nextq;
+    }
+}
+
+void free_q(queue* q) {
+    qnode* tmp = q -> head;
+    qnode* del_node = NULL;
+    while (tmp != NULL) {
+        del_node = tmp;
+        tmp = tmp -> nextq;
+        free(del_node);
+    }
+    free(q);
 }
 
 void q_push(queue* q, PCB* proc) {
