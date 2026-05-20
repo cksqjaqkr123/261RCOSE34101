@@ -1,0 +1,398 @@
+arkchanbum@fedora:~/운체 실습/261RCOSE34101$ ./test
+Test Mode (1 : Random Number, 2 : Test Case for Report)
+1
+Please type the following desired sches
+1 : FCFS, 2 : RR, 3 : Non-p-SJF, 4 : Non-p-Priority, 5 : p-SJF, 6 : p-Priority)
+6
+Type the number of processes
+5
+Type the desired seed
+10000
+Type the Bound Mode
+1 : balanced, 2 : CPU Bound, 3: I/O Bound
+2
+-------------------------
+<time : 0>
+[idle]
+-------------------------
+<time : 1>
+[idle]
+-------------------------
+<time : 2>
+[idle]
+******************************************************
+process (PID : 0) was arrived.
+CPU burst time : 13, I/O burst time : 2, I/O cycle : 12
+Priority : 8
+******************************************************
+-------------------------
+<time : 3>
+process (PID : 0) was run. (CPU burst Left : 12)
+-------------------------
+<time : 4>
+process (PID : 0) was run. (CPU burst Left : 11)
+-------------------------
+<time : 5>
+process (PID : 0) was run. (CPU burst Left : 10)
+******************************************************
+process (PID : 1) was arrived.
+CPU burst time : 7, I/O burst time : 5, I/O cycle : 7
+Priority : 2
+******************************************************
+-------------------------
+<time : 6>
+process (PID : 1) was run. (CPU burst Left : 6)
+-------------------------
+<time : 7>
+process (PID : 1) was run. (CPU burst Left : 5)
+-------------------------
+<time : 8>
+process (PID : 1) was run. (CPU burst Left : 4)
+-------------------------
+<time : 9>
+process (PID : 1) was run. (CPU burst Left : 3)
+-------------------------
+<time : 10>
+process (PID : 1) was run. (CPU burst Left : 2)
+-------------------------
+<time : 11>
+process (PID : 1) was run. (CPU burst Left : 1)
+-------------------------
+<time : 12>
+process (PID : 1) was run. (CPU burst Left : 0)
+...and successfully terminated.
+-------------------------
+<time : 13>
+process (PID : 0) was run. (CPU burst Left : 9)
+-------------------------
+<time : 14>
+process (PID : 0) was run. (CPU burst Left : 8)
+-------------------------
+<time : 15>
+process (PID : 0) was run. (CPU burst Left : 7)
+-------------------------
+<time : 16>
+process (PID : 0) was run. (CPU burst Left : 6)
+-------------------------
+<time : 17>
+process (PID : 0) was run. (CPU burst Left : 5)
+-------------------------
+<time : 18>
+process (PID : 0) was run. (CPU burst Left : 4)
+-------------------------
+<time : 19>
+process (PID : 0) was run. (CPU burst Left : 3)
+-------------------------
+<time : 20>
+process (PID : 0) was run. (CPU burst Left : 2)
+******************************************************
+process (PID : 2) was arrived.
+CPU burst time : 5, I/O burst time : 1, I/O cycle : 7
+Priority : 8
+******************************************************
+-------------------------
+<time : 21>
+process (PID : 0) was run. (CPU burst Left : 1)
+into waiting status due to I/O cycle
+-------------------------
+<time : 22>
+process (PID : 2) was run. (CPU burst Left : 4)
+-------------------------
+<time : 23>
+process (PID : 2) was run. (CPU burst Left : 3)
+process (PID : 0) I/O task ended.
+-------------------------
+<time : 24>
+process (PID : 0) was run. (CPU burst Left : 0)
+...and successfully terminated.
+-------------------------
+<time : 25>
+process (PID : 2) was run. (CPU burst Left : 2)
+******************************************************
+process (PID : 3) was arrived.
+CPU burst time : 8, I/O burst time : 5, I/O cycle : 7
+Priority : 6
+******************************************************
+-------------------------
+<time : 26>
+process (PID : 3) was run. (CPU burst Left : 7)
+-------------------------
+<time : 27>
+process (PID : 3) was run. (CPU burst Left : 6)
+******************************************************
+process (PID : 4) was arrived.
+CPU burst time : 11, I/O burst time : 4, I/O cycle : 7
+Priority : 7
+******************************************************
+-------------------------
+<time : 28>
+process (PID : 3) was run. (CPU burst Left : 5)
+-------------------------
+<time : 29>
+process (PID : 3) was run. (CPU burst Left : 4)
+-------------------------
+<time : 30>
+process (PID : 3) was run. (CPU burst Left : 3)
+-------------------------
+<time : 31>
+process (PID : 3) was run. (CPU burst Left : 2)
+-------------------------
+<time : 32>
+process (PID : 3) was run. (CPU burst Left : 1)
+into waiting status due to I/O cycle
+-------------------------
+<time : 33>
+process (PID : 4) was run. (CPU burst Left : 10)
+-------------------------
+<time : 34>
+process (PID : 4) was run. (CPU burst Left : 9)
+-------------------------
+<time : 35>
+process (PID : 4) was run. (CPU burst Left : 8)
+-------------------------
+<time : 36>
+process (PID : 4) was run. (CPU burst Left : 7)
+-------------------------
+<time : 37>
+process (PID : 4) was run. (CPU burst Left : 6)
+process (PID : 3) I/O task ended.
+-------------------------
+<time : 38>
+process (PID : 3) was run. (CPU burst Left : 0)
+...and successfully terminated.
+-------------------------
+<time : 39>
+process (PID : 4) was run. (CPU burst Left : 5)
+-------------------------
+<time : 40>
+process (PID : 4) was run. (CPU burst Left : 4)
+into waiting status due to I/O cycle
+-------------------------
+<time : 41>
+process (PID : 2) was run. (CPU burst Left : 1)
+-------------------------
+<time : 42>
+process (PID : 2) was run. (CPU burst Left : 0)
+...and successfully terminated.
+-------------------------
+<time : 43>
+[idle]
+-------------------------
+<time : 44>
+[idle]
+process (PID : 4) I/O task ended.
+-------------------------
+<time : 45>
+process (PID : 4) was run. (CPU burst Left : 3)
+-------------------------
+<time : 46>
+process (PID : 4) was run. (CPU burst Left : 2)
+-------------------------
+<time : 47>
+process (PID : 4) was run. (CPU burst Left : 1)
+-------------------------
+<time : 48>
+process (PID : 4) was run. (CPU burst Left : 0)
+...and successfully terminated.
+===========================
+All processes are terminated successfully.
+average waiting time : 6.000, average turnarround time : 17.000
+parkchanbum@fedora:~/운체 실습/261RCOSE34101$ ./test
+Test Mode (1 : Random Number, 2 : Test Case for Report)
+1
+Please type the following desired sches
+1 : FCFS, 2 : RR, 3 : Non-p-SJF, 4 : Non-p-Priority, 5 : p-SJF, 6 : p-Priority)
+3
+Type the number of processes
+5
+Type the desired seed
+10000
+Type the Bound Mode
+1 : balanced, 2 : CPU Bound, 3: I/O Bound
+2
+-------------------------
+<time : 0>
+[idle]
+-------------------------
+<time : 1>
+[idle]
+-------------------------
+<time : 2>
+[idle]
+******************************************************
+process (PID : 0) was arrived.
+CPU burst time : 13, I/O burst time : 2, I/O cycle : 12
+Priority : 8
+******************************************************
+-------------------------
+<time : 3>
+process (PID : 0) was run. (CPU burst Left : 12)
+-------------------------
+<time : 4>
+process (PID : 0) was run. (CPU burst Left : 11)
+-------------------------
+<time : 5>
+process (PID : 0) was run. (CPU burst Left : 10)
+******************************************************
+process (PID : 1) was arrived.
+CPU burst time : 7, I/O burst time : 5, I/O cycle : 7
+Priority : 2
+******************************************************
+-------------------------
+<time : 6>
+process (PID : 0) was run. (CPU burst Left : 9)
+-------------------------
+<time : 7>
+process (PID : 0) was run. (CPU burst Left : 8)
+-------------------------
+<time : 8>
+process (PID : 0) was run. (CPU burst Left : 7)
+-------------------------
+<time : 9>
+process (PID : 0) was run. (CPU burst Left : 6)
+-------------------------
+<time : 10>
+process (PID : 0) was run. (CPU burst Left : 5)
+-------------------------
+<time : 11>
+process (PID : 0) was run. (CPU burst Left : 4)
+-------------------------
+<time : 12>
+process (PID : 0) was run. (CPU burst Left : 3)
+-------------------------
+<time : 13>
+process (PID : 0) was run. (CPU burst Left : 2)
+-------------------------
+<time : 14>
+process (PID : 0) was run. (CPU burst Left : 1)
+into waiting status due to I/O cycle
+-------------------------
+<time : 15>
+process (PID : 1) was run. (CPU burst Left : 6)
+-------------------------
+<time : 16>
+process (PID : 1) was run. (CPU burst Left : 5)
+process (PID : 0) I/O task ended.
+-------------------------
+<time : 17>
+process (PID : 1) was run. (CPU burst Left : 4)
+-------------------------
+<time : 18>
+process (PID : 1) was run. (CPU burst Left : 3)
+-------------------------
+<time : 19>
+process (PID : 1) was run. (CPU burst Left : 2)
+-------------------------
+<time : 20>
+process (PID : 1) was run. (CPU burst Left : 1)
+******************************************************
+process (PID : 2) was arrived.
+CPU burst time : 5, I/O burst time : 1, I/O cycle : 7
+Priority : 8
+******************************************************
+-------------------------
+<time : 21>
+process (PID : 1) was run. (CPU burst Left : 0)
+...and successfully terminated.
+-------------------------
+<time : 22>
+process (PID : 2) was run. (CPU burst Left : 4)
+-------------------------
+<time : 23>
+process (PID : 2) was run. (CPU burst Left : 3)
+-------------------------
+<time : 24>
+process (PID : 2) was run. (CPU burst Left : 2)
+-------------------------
+<time : 25>
+process (PID : 2) was run. (CPU burst Left : 1)
+******************************************************
+process (PID : 3) was arrived.
+CPU burst time : 8, I/O burst time : 5, I/O cycle : 7
+Priority : 6
+******************************************************
+-------------------------
+<time : 26>
+process (PID : 2) was run. (CPU burst Left : 0)
+...and successfully terminated.
+-------------------------
+<time : 27>
+process (PID : 3) was run. (CPU burst Left : 7)
+******************************************************
+process (PID : 4) was arrived.
+CPU burst time : 11, I/O burst time : 4, I/O cycle : 7
+Priority : 7
+******************************************************
+-------------------------
+<time : 28>
+process (PID : 3) was run. (CPU burst Left : 6)
+-------------------------
+<time : 29>
+process (PID : 3) was run. (CPU burst Left : 5)
+-------------------------
+<time : 30>
+process (PID : 3) was run. (CPU burst Left : 4)
+-------------------------
+<time : 31>
+process (PID : 3) was run. (CPU burst Left : 3)
+-------------------------
+<time : 32>
+process (PID : 3) was run. (CPU burst Left : 2)
+-------------------------
+<time : 33>
+process (PID : 3) was run. (CPU burst Left : 1)
+into waiting status due to I/O cycle
+-------------------------
+<time : 34>
+process (PID : 4) was run. (CPU burst Left : 10)
+-------------------------
+<time : 35>
+process (PID : 4) was run. (CPU burst Left : 9)
+-------------------------
+<time : 36>
+process (PID : 4) was run. (CPU burst Left : 8)
+-------------------------
+<time : 37>
+process (PID : 4) was run. (CPU burst Left : 7)
+-------------------------
+<time : 38>
+process (PID : 4) was run. (CPU burst Left : 6)
+process (PID : 3) I/O task ended.
+-------------------------
+<time : 39>
+process (PID : 4) was run. (CPU burst Left : 5)
+-------------------------
+<time : 40>
+process (PID : 4) was run. (CPU burst Left : 4)
+into waiting status due to I/O cycle
+-------------------------
+<time : 41>
+process (PID : 3) was run. (CPU burst Left : 0)
+...and successfully terminated.
+-------------------------
+<time : 42>
+process (PID : 0) was run. (CPU burst Left : 0)
+...and successfully terminated.
+-------------------------
+<time : 43>
+[idle]
+-------------------------
+<time : 44>
+[idle]
+process (PID : 4) I/O task ended.
+-------------------------
+<time : 45>
+process (PID : 4) was run. (CPU burst Left : 3)
+-------------------------
+<time : 46>
+process (PID : 4) was run. (CPU burst Left : 2)
+-------------------------
+<time : 47>
+process (PID : 4) was run. (CPU burst Left : 1)
+-------------------------
+<time : 48>
+process (PID : 4) was run. (CPU burst Left : 0)
+...and successfully terminated.
+===========================
+All processes are terminated successfully.
+average waiting time : 8.800, average turnarround time : 19.800

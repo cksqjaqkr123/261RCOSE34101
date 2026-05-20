@@ -34,6 +34,9 @@ typedef struct queue {
 
 void kernel_panic(void);
 PCB* make_proc(void);
+PCB* make_proc_CPU_B(void);
+PCB* make_proc_IO_B(void);
+PCB* make_non_rand_proc(int Arrival, int Priority, int CPU_burst, int IO_burst, int IO_cycle);
 void print_PCB(PCB* proc);
 
 qnode* make_qnode(PCB* proc);

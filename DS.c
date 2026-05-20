@@ -11,12 +11,67 @@ PCB* make_proc(void) {
 
     new_PCB -> PID = 0;
 
-    new_PCB -> Arrival_t = rand() % 51;
+    new_PCB -> Arrival_t = rand() % 31;
     new_PCB -> Priority = rand() % 10;
 
-    new_PCB -> CPU_burst_remain = new_PCB -> CPU_burst_t = rand() % 30;
-    new_PCB -> IO_burst_remain = new_PCB -> IO_burst_t = rand() % 15;
-    new_PCB -> IO_cycle_remain = new_PCB -> IO_cycle = rand() % 40;
+    new_PCB -> CPU_burst_remain = new_PCB -> CPU_burst_t = rand() % 10 + 1;
+    new_PCB -> IO_burst_remain = new_PCB -> IO_burst_t = rand() % 10 + 1;
+    new_PCB -> IO_cycle_remain = new_PCB -> IO_cycle = rand() % 15 + 1;
+    new_PCB -> Q = 0;
+    
+    new_PCB -> next = NULL;
+
+    return new_PCB;
+}
+
+PCB* make_proc_CPU_B(void) {
+    PCB* new_PCB = malloc(sizeof(PCB));
+
+    new_PCB -> PID = 0;
+
+    new_PCB -> Arrival_t = rand() % 31;
+    new_PCB -> Priority = rand() % 10;
+
+    new_PCB -> CPU_burst_remain = new_PCB -> CPU_burst_t = rand() % 10 + 5;
+    new_PCB -> IO_burst_remain = new_PCB -> IO_burst_t = rand() % 5 + 1;
+    new_PCB -> IO_cycle_remain = new_PCB -> IO_cycle = rand() % 20 + 5;
+    new_PCB -> Q = 0;
+    
+    new_PCB -> next = NULL;
+
+    return new_PCB;
+}
+
+PCB* make_proc_IO_B(void) {
+    PCB* new_PCB = malloc(sizeof(PCB));
+
+    new_PCB -> PID = 0;
+
+    new_PCB -> Arrival_t = rand() % 31;
+    new_PCB -> Priority = rand() % 10;
+
+    new_PCB -> CPU_burst_remain = new_PCB -> CPU_burst_t = rand() % 5 + 1;
+    new_PCB -> IO_burst_remain = new_PCB -> IO_burst_t = rand() % 10 + 5;
+    new_PCB -> IO_cycle_remain = new_PCB -> IO_cycle = rand() % 3 + 1;
+    new_PCB -> Q = 0;
+    
+    new_PCB -> next = NULL;
+
+    return new_PCB;
+}
+
+
+PCB* make_non_rand_proc(int Arrival, int Priority, int CPU_burst, int IO_burst, int IO_cycle) {
+    PCB* new_PCB = malloc(sizeof(PCB));
+
+    new_PCB -> PID = 0;
+
+    new_PCB -> Arrival_t = Arrival;
+    new_PCB -> Priority = Priority;
+
+    new_PCB -> CPU_burst_remain = new_PCB -> CPU_burst_t = CPU_burst;
+    new_PCB -> IO_burst_remain = new_PCB -> IO_burst_t = IO_burst;
+    new_PCB -> IO_cycle_remain = new_PCB -> IO_cycle = IO_cycle;
     new_PCB -> Q = 0;
     
     new_PCB -> next = NULL;

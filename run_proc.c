@@ -99,8 +99,11 @@ PCB* sche(queue* ready_q, heap* ready_h, PCB* run_p, int tick, int mode) {
     return run_p;
 };
 
-void proc_run(PCB** run_p, int tick, int* proc_cnt, int* turn_t) {
-    if (*run_p == NULL) return;
+void proc_run(PCB** run_p, int tick, int* proc_cnt, int* turn_t, int* idle) {
+    if (*run_p == NULL) {
+        *idle = 1;
+        return;
+    }
 
     (*run_p) -> CPU_burst_remain -= 1;
     (*run_p) -> IO_cycle_remain -= 1;
