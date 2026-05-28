@@ -12,6 +12,6 @@ void push_ready_q(queue* ready_q, heap* ready_h, PCB* proc, int mode);
 
 PCB* sche(queue* ready_q, heap* ready_h, PCB* run_p, int tick, int mode);
 
-void proc_run(PCB** run_p, int tick, int* proc_cnt, int* turn_t, int* idle);
+void proc_run(PCB** run_p, int tick, int* proc_cnt, int* turn_t, int time_cnt, int gant[]);
 
 #endif

@@ -1,6 +1,7 @@
 #ifndef MY_HEADER_H
 #define MY_HEADER_H
 
+// Spec of PCB
 typedef struct PCB {
     int PID;
 

@@ -6,11 +6,13 @@
 #define WAIT_L_SIZE 100
 #define HEAP_SIZE 200
 
+// Creates an array of Job Queues indexed by Arrival Time
 queue** make_job_q(queue* procs) {
     int cnt = 0;
     queue** new_job_q = malloc(sizeof(queue*) * JOB_Q_SIZE);
     qnode* tmp = procs -> head;
 
+    // Distributes generated processes into their respective arrival time slots
     for (int i = 0; i < JOB_Q_SIZE ; i++) {
         new_job_q[i] = q_make();
     }
@@ -31,6 +33,7 @@ void free_job_q(queue** job_q) {
     free(job_q);
 }
 
+// Initializes a static array to hold processes currently in I/O wait state
 PCB** make_wait_list(void) {
     PCB** new_wait_list = malloc(sizeof(PCB*) * WAIT_L_SIZE);
     for (int i = 0; i < WAIT_L_SIZE; i++) {
@@ -47,6 +50,7 @@ void free_wait_list(PCB** wait_list) {
     free(wait_list);
 }
 
+// Initializes a Min-heap structure for Priority and SJF scheduling
 heap* make_heap(void) {
     heap* new_heap = malloc(sizeof(heap));
 
@@ -59,6 +63,8 @@ heap* make_heap(void) {
     return new_heap;
 }
 
+// Inserts a process into the Min-heap and maintains the heap property. Time Complexity: O(log N)
+// Utilizes a function pointer (*compare) to dynamically determine the ordering criteria
 void push_heap(heap* heap, PCB* proc, int (*compare) (PCB*, PCB*)) {
     if (heap -> size >= HEAP_SIZE) return;
 
@@ -67,6 +73,7 @@ void push_heap(heap* heap, PCB* proc, int (*compare) (PCB*, PCB*)) {
     int idx = heap -> size;
     int parent = 0;
 
+    // Up-heapify (Bubble-up)
     while (idx != 0) {
         parent = (int) (idx - 1) / 2;
 
@@ -80,6 +87,7 @@ void push_heap(heap* heap, PCB* proc, int (*compare) (PCB*, PCB*)) {
     heap -> size += 1;
 }
 
+// Extracts the root node (highest priority/shortest job) from the Min-heap. Time Complexity: O(log N)
 PCB* pop_heap(heap* heap, int (*compare) (PCB*, PCB*)) {
     if (heap -> size == 0) return NULL;
 
@@ -92,6 +100,7 @@ PCB* pop_heap(heap* heap, int (*compare) (PCB*, PCB*)) {
     int idx = 0;
     int new_idx = 0;
 
+    // Down-heapify (Bubble-down)
     while (idx < heap -> size) {
         left = 2 * idx + 1;
         right = 2 * idx + 2;
@@ -135,6 +144,7 @@ void swap(PCB** array, int i, int j) {
     array[j] = tmp;
 }
 
+// Comparator: Static Priority (Non-preemptive)
 int compare_Priority_fix(PCB* a, PCB* b) {
     int aP = a -> Priority;
     int bP = b -> Priority;
@@ -144,6 +154,7 @@ int compare_Priority_fix(PCB* a, PCB* b) {
     else return -1;
 }
 
+// Comparator: Static Shortest Job (Non-preemptive SJF based on initial burst time)
 int compare_SJ_fix(PCB* a, PCB* b) {
     int aJ = a -> CPU_burst_t;
     int bJ = b -> CPU_burst_t;
@@ -152,6 +163,7 @@ int compare_SJ_fix(PCB* a, PCB* b) {
     else return -1;
 }
 
+// Comparator: Dynamic Priority (Preemptive)
 int compare_Priority_burst(PCB* a, PCB* b) {
     int aP = a -> Priority;
     int bP = b -> Priority;
@@ -161,6 +173,7 @@ int compare_Priority_burst(PCB* a, PCB* b) {
     else return -1;
 }
 
+// Comparator: Shortest Remaining Time First (Preemptive SJF based on remaining burst time)
 int compare_SJ_burst(PCB* a, PCB* b) {
     int aJ = a -> CPU_burst_remain;
     int bJ = b -> CPU_burst_remain;

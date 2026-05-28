@@ -2,11 +2,14 @@
 #include "DS.h"
 #include <stdlib.h>
 
+// Halts the system in case of critical errors (e.g., Wait List overflow)
+
 void kernel_panic(void) {
     printf("panic!!!!\n");
     exit(1);
 }
 
+// Allocates and initializes a PCB for a balanced workload
 PCB* make_proc(void) {
     PCB* new_PCB = malloc(sizeof(PCB));
 
@@ -25,6 +28,7 @@ PCB* make_proc(void) {
     return new_PCB;
 }
 
+// Allocates a PCB tailored for CPU-bound environments (Long CPU burst, short I/O)
 PCB* make_proc_CPU_B(void) {
     PCB* new_PCB = malloc(sizeof(PCB));
 
@@ -42,6 +46,8 @@ PCB* make_proc_CPU_B(void) {
 
     return new_PCB;
 }
+
+// Allocates a PCB tailored for I/O-bound environments (Short CPU burst, long I/O)
 
 PCB* make_proc_IO_B(void) {
     PCB* new_PCB = malloc(sizeof(PCB));
@@ -61,7 +67,7 @@ PCB* make_proc_IO_B(void) {
     return new_PCB;
 }
 
-
+// Allocates a PCB manually for deterministic test cases
 PCB* make_non_rand_proc(int Arrival, int Priority, int CPU_burst, int IO_burst, int IO_cycle) {
     PCB* new_PCB = malloc(sizeof(PCB));
 
@@ -88,6 +94,7 @@ void print_PCB(PCB* proc) {
     printf("IO burst time : %d\n", proc -> IO_burst_t);
 }
 
+// Creates a node for the linked-list based queue
 qnode* make_qnode(PCB* proc) {
     qnode* new_qnode = malloc(sizeof(qnode));
 
@@ -96,6 +103,8 @@ qnode* make_qnode(PCB* proc) {
 
     return new_qnode;
 }
+
+// Initializes a basic FIFO Queue
 queue* q_make() {
     queue* new_q = malloc(sizeof(queue));
 
@@ -106,6 +115,7 @@ queue* q_make() {
     return new_q;
 }
 
+// Safely deallocates all PCBs within a queue to prevent memory leaks
 void free_PCB_q(queue* q) {
     qnode* tmp = q -> head;
     while (tmp != NULL) {
@@ -114,6 +124,7 @@ void free_PCB_q(queue* q) {
     }
 }
 
+// Deallocates the queue structure itself
 void free_q(queue* q) {
     qnode* tmp = q -> head;
     qnode* del_node = NULL;
@@ -125,6 +136,7 @@ void free_q(queue* q) {
     free(q);
 }
 
+// Enqueues a PCB into the FIFO Queue. Time Complexity: O(1)
 void q_push(queue* q, PCB* proc) {
 
     qnode* new_qnode = make_qnode(proc);
@@ -140,6 +152,7 @@ void q_push(queue* q, PCB* proc) {
     q -> cnt += 1;
 }
 
+// Dequeues a PCB from the FIFO Queue. Time Complexity: O(1)
 PCB* q_pop(queue* q) {
     qnode* qtmp = NULL;
     PCB* ptmp = NULL;
