@@ -44,6 +44,7 @@ int main(void) {
             printf("Incorrect number range. Retry typing.\n");
         }
     }
+    else if (Test_mode == 2) n = 4;
 
     tick(n, mode, Test_mode, B_mode);
 

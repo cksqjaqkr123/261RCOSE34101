@@ -82,6 +82,8 @@ void tick(int n, int mode, int Test_mode, int B_mode) {
 
         time_cnt += 1; // Increment global time tick
 
+        usleep(50000);
+
     }
     gant[time_cnt] = -999;  // End-of-execution marker
 
